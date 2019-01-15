@@ -3,7 +3,6 @@ const path = require('path'),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
     UglifyJsPlugin = require('uglifyjs-webpack-plugin'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
-    // autoprefixer = require('autoprefixer'),
     OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
     CleanWebpackPlugin = require('clean-webpack-plugin');
 

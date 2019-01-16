@@ -3,7 +3,6 @@ const path = require('path'),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
     UglifyJsPlugin = require('uglifyjs-webpack-plugin'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
-    OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
     CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
@@ -19,7 +18,6 @@ module.exports = {
     devServer: {
         overlay: true,
         compress: true,
-        openPage: 'dist/'
     },
     optimization: {
         minimizer: [
@@ -108,15 +106,6 @@ module.exports = {
                 ignore: [
                     {glob: 'svg/*'}
                 ]
-            }
-        ),
-        new OptimizeCssAssetsPlugin(
-            {
-                assetNameRegExp: /\.css$/g,
-                cssProcessor: require('cssnano'),
-                cssProcessorPluginOptions: {
-                    preset: ['default', { discardComments: { removeAll: true } }]
-                }
             }
         )
     ]

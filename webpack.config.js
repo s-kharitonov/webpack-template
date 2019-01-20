@@ -3,7 +3,6 @@ const path = require('path'),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
     UglifyJsPlugin = require('uglifyjs-webpack-plugin'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
-    ResolveUrlLoader = require("resolve-url-loader"),
     CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
@@ -51,14 +50,13 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: { sourceMap: true, config: { path: './postcss.config.js' } }
                     },
-                    {
-                        loader: "resolve-url-loader",
-                        options: {
-                            debug: true,
-                            sourceMap: true,
-                            root: 'http://localhost:63343/webpack-template/dist/'
-                        },
-                    },
+                    // {
+                    //     loader: "resolve-url-loader",
+                    //     options: {
+                    //         debug: true,
+                    //         sourceMap: true
+                    //     },
+                    // },
                     {
                         loader: 'sass-loader',
                         options: { sourceMap: true }
@@ -111,7 +109,7 @@ module.exports = {
         ),
         new  MiniCssExtractPlugin(
             {
-                filename: 'scss/[name].css',
+                filename: 'scss/[name].css'
             }
         ),
         new CleanWebpackPlugin(
@@ -121,10 +119,10 @@ module.exports = {
         ),
         new CopyWebpackPlugin(
             [
-                // {
-                //     from: './img',
-                //     to: 'img'
-                // },
+                {
+                    from: './img',
+                    to: 'img'
+                },
                 {
                     from: './fonts',
                     to: 'fonts'

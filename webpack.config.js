@@ -3,6 +3,7 @@ const path = require('path'),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
     UglifyJsPlugin = require('uglifyjs-webpack-plugin'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
+    ResolveUrlLoader = require("resolve-url-loader"),
     CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
@@ -12,12 +13,11 @@ module.exports = {
     },
     output: {
         filename: 'js/[name].js',
-        path: path.resolve(__dirname, './dist'),
-        publicPath: '/dist/'
+        path: path.resolve(__dirname, './dist')
     },
     devServer: {
         overlay: true,
-        compress: true,
+        compress: true
     },
     optimization: {
         minimizer: [
@@ -38,10 +38,31 @@ module.exports = {
             {
                 test: /\.(sa|sc|c)ss$/,
                 use:[
+                    'style-loader',
                     MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'postcss-loader',
-                    'sass-loader'
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                            url: true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: { sourceMap: true, config: { path: './postcss.config.js' } }
+                    },
+                    {
+                        loader: "resolve-url-loader",
+                        options: {
+                            debug: true,
+                            sourceMap: true,
+                            root: 'http://localhost:63343/webpack-template/dist/'
+                        },
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: { sourceMap: true }
+                    }
                 ]
             },
             {
@@ -84,7 +105,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin(
             {
-                template: './index.html',
+                template: './pages/index.html',
                 removeScriptTypeAttributes: true,
             }
         ),
@@ -100,7 +121,14 @@ module.exports = {
         ),
         new CopyWebpackPlugin(
             [
-                {from: './img', to: 'img'}
+                // {
+                //     from: './img',
+                //     to: 'img'
+                // },
+                {
+                    from: './fonts',
+                    to: 'fonts'
+                }
             ],
             {
                 ignore: [

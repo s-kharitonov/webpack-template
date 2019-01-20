@@ -1,0 +1,14 @@
+.site-wrap_dec{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.site-wrap_dec div{
+    width: 400px;
+    height: 200px;
+    background: url("../img/webpack-logo.png") no-repeat center center;
+    background-size: cover;
+}

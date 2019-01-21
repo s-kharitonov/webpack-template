@@ -38,7 +38,12 @@ module.exports = {
                 test: /\.(sa|sc|c)ss$/,
                 use:[
                     'style-loader',
-                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: '../'
+                        }
+                    },
                     {
                         loader: 'css-loader',
                         options: {
@@ -50,13 +55,13 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: { sourceMap: true, config: { path: './postcss.config.js' } }
                     },
-                    // {
-                    //     loader: "resolve-url-loader",
-                    //     options: {
-                    //         debug: true,
-                    //         sourceMap: true
-                    //     },
-                    // },
+                    {
+                        loader: "resolve-url-loader",
+                        options: {
+                            debug: true,
+                            sourceMap: true
+                        },
+                    },
                     {
                         loader: 'sass-loader',
                         options: { sourceMap: true }
